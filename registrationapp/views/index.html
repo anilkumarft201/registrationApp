@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" media="screen and (max-width:600px)" href="./style1.css">
+    <link rel="stylesheet" media="screen and (min-width:601px)" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card" id="card1">
+            
+            <h1>Registration</h1>
+
+            <div class="formfield">
+
+                <div class="field">
+                    <label for="name"><i class="fa-regular fa-user"></i>&nbsp;Name</label>
+                    <input type="text" id="name" name="name" placeholder="Name">
+                    <div class="small" id="name_error"></div>
+                </div>
+                <div class="field">
+                    <label for="email"><i class="fa-regular fa-envelope"></i>&nbsp;Email</label>
+                    <input type="text" id="email" name="email" placeholder="Adams@gmail.com">
+                    <div class="small" id="email_error"></div>
+    
+                </div>
+                <div class="field">
+                    <label for="pwd"><i class="fa-solid fa-lock"></i>&nbsp;Password</label>
+                    <input type="password" id="pwd" name="pwd" placeholder="Adams123">
+                    <div class="small" id="pwd_error"></div>    
+                </div>
+
+                <div class="field">
+                    <label for="pwd"><i class="fa-solid fa-key"></i>&nbsp;Confirm Password</label>
+                    <input type="password" id="cnfpwd" name="cnfpwd" placeholder="Adams123">
+                    <div class="small" id="cnf_pwd_error"></div>    
+                </div>
+ 
+                <button type="submit" id="save_data">Submit</button>
+                <button type="submit" id="submit_data">getData</button>
+            </div>
+
+        </div>
+        <div class="card" id="card2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="detail"></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+
+</html>
