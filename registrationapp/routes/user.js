@@ -4,10 +4,11 @@ const registerdb = require('../usermodel');
 require('dotenv').config();
 
 router.get("/", (req, res) => {
-    res.render('index');
+    return res.render('index');
 })
 
 router.post("/create", async (req, resp) => {
+
     console.log("Request: ")
     console.log(req.body.name);
     let data = new registerdb(req.body);
@@ -23,19 +24,42 @@ router.post("/create", async (req, resp) => {
 })
 
 router.post("/register", async (req, resp) => {
-    let data = new registerdb(req.body);
-    let exist = await registerdb.find({ "email": { $regex: req.body.email } })
-    if (exist.length > 0) {
-        // resp.send({ message: "Email alreday exists" });
-        resp.render('deny',{message:"Email already exist"});
+
+    const { name, email, password, cnfpwd } = req.body;
+    console.log(password);
+    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (name == '') {
+        return resp.render('index', { name_error: "Name must be entered" });
+    }
+    if (email == '') {
+        return resp.render('index', { email_error: "Email Must be Entered" });
+    }
+    if (!email_pattern.test(email)) {
+        return resp.render('index', { email_error: "Invalid Email Format" });
+    }
+    else if (password == '') {
+        return resp.render('index', { pwd_error: "Password Must Be Entered" });
+    }
+    else if (cnfpwd == '') {
+        return resp.render('index', { cnfpwd_error: "Confirm Password Must Be Entered" });
+    }
+    else if (password != cnfpwd) {
+        return resp.render('index', { pwd_error: "Password and Confirm Password Must Be Same", cnfpwd_error: "Password and Confirm Password Must Be Same" });
     }
     else {
-        let result = await data.save();
-        // resp.send({ message: "Registered Succesfully" });
-        resp.render('deny',{message:"Registered Succesfully"});
+        let data = new registerdb(req.body);
+        let exist = await registerdb.find({ "email": req.body.email })
+        if (Array.isArray(exist) && exist.length > 0) {
+            // resp.send({ message: "Email alreday exists" });
+            return resp.render('index', { email_error: "Email Already Exist" });
+        }
+        else {
+            let result = await data.save();
+            // resp.send({ message: "Registered Succesfully" });
+            return resp.render('deny', { message: "Registered Succesfully" });
 
+        }
     }
-
 })
 
 router.get("/show", async (req, res) => {
@@ -76,5 +100,7 @@ router.get("/search/:key", async (req, resp) => {
     resp.send(data);
 });
 
-
+router.get("/ok", async (req, resp) => {
+    return resp.redirect("/");
+})
 module.exports = router;

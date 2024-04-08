@@ -29,29 +29,29 @@
 
             <h1>Registration</h1>
 
-            <form class="formfield" action="user/register" onsubmit="return formValidation()" method="post" >
+            <form class="formfield" action="/register" method="post" >
 
                 <div class="field">
                     <label for="name"><i class="fa-regular fa-user"></i>&nbsp;Name</label>
                     <input type="text" id="name" name="name" placeholder="Name">
-                    <div class="small" id="name_error"></div>
+                    <div class="small" id="name_error"><%if(locals.name_error){%><%=name_error%><%}%></div>
                 </div>
                 <div class="field">
                     <label for="email"><i class="fa-regular fa-envelope"></i>&nbsp;Email</label>
                     <input type="text" id="email" name="email" placeholder="Adams@gmail.com">
-                    <div class="small" id="email_error"></div>
+                    <div class="small" id="email_error"><%if(locals.email_error){%><%=email_error%><%}%></div>
 
                 </div>
                 <div class="field">
                     <label for="pwd"><i class="fa-solid fa-lock"></i>&nbsp;Password</label>
-                    <input type="password" id="pwd" name="pwd" placeholder="Adams123">
-                    <div class="small" id="pwd_error"></div>
+                    <input type="password" id="password" name="password" placeholder="Adams123">
+                    <div class="small" id="pwd_error"><%if(locals.pwd_error){%><%=pwd_error%><%}%></div>
                 </div>
 
                 <div class="field">
                     <label for="cnfpwd"><i class="fa-solid fa-key"></i>&nbsp;Confirm Password</label>
                     <input type="password" id="cnfpwd" name="cnfpwd" placeholder="Adams123">
-                    <div class="small" id="cnf_pwd_error"></div>
+                    <div class="small" id="cnf_pwd_error"><%if(locals.cnfpwd_error){%><%=cnfpwd_error%><%}%></div>
                 </div>
 
                 <button type="submit" id="save_data">Submit</button>

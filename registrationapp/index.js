@@ -13,13 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 app.set('view engine','ejs');
-// app.set('views',path.join(__dirname,'views'));
+//app.set('views',path.join(__dirname,'views'));
 // app.get("/",(req,res)=>{
 //     console.log(req.body);
 //     res.render('index');
 // })
 
-app.use("/user", userRouter);
+app.use("/", userRouter);
 app.use(express.static("views"));
 
 // app.post("/create",async (req,resp)=>{
